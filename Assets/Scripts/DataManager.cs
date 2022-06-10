@@ -22,6 +22,18 @@ public class DataManager : MonoBehaviour
     // Method called when m_Gameover = true to collect score, and update session and JSON file with high score
     public void ReportScore(int score)
     {
+        int currentScore;
+        currentScore = score;
+        if (currentScore > highScore)
+        {
+            highScore = currentScore;
+        }
+        Debug.Log("The score is " + currentScore);
+        Debug.Log("The high score is " + highScore);
+    }
 
+    public int SetHighScore()
+    {
+        return highScore;
     }
 }
