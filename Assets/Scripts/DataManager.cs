@@ -7,11 +7,10 @@ using UnityEngine.UI;
 public class DataManager : MonoBehaviour
 {
     public static DataManager Instance;
-    public static int highScore;
+    //public static int highScore;
 
-    public string playerName = "Chris";
-    
-    
+    public string playerName;
+
     private void Awake()
     {
         if (Instance != null)
@@ -24,25 +23,35 @@ public class DataManager : MonoBehaviour
     }
 
     // Method called when m_Gameover = true to collect score, and update session and JSON file with high score
-    public void ReportScore(int score)
+    public void SetScore(string name, int score)
     {
         int currentScore;
+        string currentName;
         currentScore = score;
-        if (currentScore > highScore)
+        currentName = name;
+        if (currentScore > TopPlayer.highScore)
         {
-            highScore = currentScore;
+            TopPlayer.highScore = currentScore;
+            TopPlayer.highName = currentName;
         }
         Debug.Log("The score is " + currentScore);
-        Debug.Log("The high score is " + highScore);
+        Debug.Log("The high score is " + TopPlayer.highScore);
     }
 
-    public int SetHighScore()
+    public int GetHighScore()
     {
-        return highScore;
+        return TopPlayer.highScore;
     }
 
     public string GetName()
     {
         return playerName;
     }
+
+    public class TopPlayer
+    {
+        public static string highName;
+        public static int highScore;
+    }
+
 }
