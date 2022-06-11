@@ -2,11 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 //using System.IO;
+using UnityEngine.UI;
 
 public class DataManager : MonoBehaviour
 {
     public static DataManager Instance;
     public static int highScore;
+
+    public string playerName = "Chris";
+    
     
     private void Awake()
     {
@@ -35,5 +39,10 @@ public class DataManager : MonoBehaviour
     public int SetHighScore()
     {
         return highScore;
+    }
+
+    public string GetName()
+    {
+        return playerName;
     }
 }

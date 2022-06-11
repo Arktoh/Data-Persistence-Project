@@ -16,6 +16,7 @@ public class MainManager : MonoBehaviour
     
     private bool m_Started = false;
     private int m_Points;
+    private string playerName = "Chris";
     
     private bool m_GameOver = false;
 
@@ -40,7 +41,8 @@ public class MainManager : MonoBehaviour
                 brick.onDestroyed.AddListener(AddPoint);
             }
         }
-        HighScoreText.text = $"Best Score : {dataManager.SetHighScore()}";
+        playerName = dataManager.GetName();
+        HighScoreText.text = $"Best Score : {playerName} {dataManager.SetHighScore()}";
     }
 
     private void Update()
@@ -79,6 +81,7 @@ public class MainManager : MonoBehaviour
         m_GameOver = true;
         GameOverText.SetActive(true);
         dataManager.ReportScore(m_Points);
-        HighScoreText.text = $"Best Score : {dataManager.SetHighScore()}";
+        HighScoreText.text = $"Best Score : {playerName} {dataManager.SetHighScore()}";
+        Debug.Log(dataManager.GetName());
     }
 }
