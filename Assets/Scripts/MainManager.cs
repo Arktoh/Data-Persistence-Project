@@ -15,16 +15,21 @@ public class MainManager : MonoBehaviour
     public GameObject GameOverText;
     
     private bool m_Started = false;
-    private int m_Points;
+    //private int m_Points;
     
     private bool m_GameOver = false;
 
-    public DataManager dataManager; 
+    public DataManager dataManager;
+    public ScriptableObject Player;
     
     // Start is called before the first frame update
     void Start()
     {
+        //DataManager dataManager = gameObject.AddComponent<DataManager>();
         dataManager = GameObject.Find("DataManager").GetComponent<DataManager>();
+
+        //Error Message: "NullReferenceException: Object reference not set to an instance of an object
+        Debug.Log("Playing a new game. Player name is: " + dataManager.newPlayer.Name);
 
         const float step = 0.6f;
         int perLine = Mathf.FloorToInt(4.0f / step);
@@ -40,12 +45,11 @@ public class MainManager : MonoBehaviour
                 brick.onDestroyed.AddListener(AddPoint);
             }
         }
-        //playerName = dataManager.GetName();
-        HighScoreText.text = $"Best Score : {DataManager.TopPlayer.highName} {DataManager.TopPlayer.highScore}";
+        HighScoreText.text = $"Best Score : {dataManager.HighScoreText()}";
     }
 
     private void Update()
-    {
+    { 
         if (!m_Started)
         {
             if (Input.GetKeyDown(KeyCode.Space))
@@ -63,7 +67,6 @@ public class MainManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
                 SceneManager.LoadScene(0);
             }
         }
@@ -71,16 +74,18 @@ public class MainManager : MonoBehaviour
 
     void AddPoint(int point)
     {
-        m_Points += point;
-        ScoreText.text = $"Score : {m_Points}";
+        dataManager.newPlayer.Score += point;
+        ScoreText.text = $"Score : {dataManager.newPlayer.Score}";
+        //dataManager.newPlayer.SetScore(m_Points);
     }
 
     public void GameOver()
     {
         m_GameOver = true;
+
         GameOverText.SetActive(true);
-        dataManager.SetScore(dataManager.playerName, m_Points);
-        HighScoreText.text = $"Best Score : {DataManager.TopPlayer.highName} {DataManager.TopPlayer.highScore}";
-        Debug.Log(dataManager.GetName());
+        dataManager.SetScore();
+        HighScoreText.text = $"Best Score : {dataManager.highScore.Name} {dataManager.highScore.Score}";
+        Debug.Log(dataManager.highScore.Name);
     }
 }

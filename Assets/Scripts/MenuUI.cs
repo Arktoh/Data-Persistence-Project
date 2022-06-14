@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using TMPro;
 
 
+
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -15,10 +16,10 @@ public class MenuUI : MonoBehaviour
     public DataManager dataManager;
     public GameObject inputField;
 
+
     public void Start()
     {
         dataManager = GameObject.Find("DataManager").GetComponent<DataManager>();
-
     }
 
     public void StartGame()
@@ -37,8 +38,15 @@ public class MenuUI : MonoBehaviour
 
     public void SetName()
     {
-        dataManager.playerName = inputField.GetComponent<TextMeshProUGUI>().text;
-        //dataManager.playerName = s;
-        Debug.Log("Set Name button pressed" + dataManager.playerName);
+        //string n = (inputField.GetComponent<TextMeshProUGUI>().text);
+        //Debug.Log("Input Field is " + n);
+
+        //Error Message: "NullReferenceException: Object reference not set to an instance of an object
+        DataManager.Instance.newPlayer.Name = inputField.GetComponent<TextMeshProUGUI>().text;
+        //dataManager.newPlayer.Name = inputField.GetComponent<TextMeshProUGUI>().text;
+        Debug.Log("newPlayer.Name taken from input; Name is " + dataManager.newPlayer.Name);
+
+        Debug.Log("Set Name button pressed" + dataManager.newPlayer.Name);
     }
+
 }

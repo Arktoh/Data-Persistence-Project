@@ -7,9 +7,9 @@ using UnityEngine.UI;
 public class DataManager : MonoBehaviour
 {
     public static DataManager Instance;
-    //public static int highScore;
 
-    public string playerName;
+    public Player newPlayer;
+    public Player highScore;
 
     private void Awake()
     {
@@ -22,36 +22,54 @@ public class DataManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    // Method called when m_Gameover = true to collect score, and update session and JSON file with high score
-    public void SetScore(string name, int score)
+    public void Start()
     {
-        int currentScore;
-        string currentName;
-        currentScore = score;
-        currentName = name;
-        if (currentScore > TopPlayer.highScore)
+        //Instantiate newPlayer Player Object
+        Player newPlayer = new()
         {
-            TopPlayer.highScore = currentScore;
-            TopPlayer.highName = currentName;
+            Name = "Blank",
+            Score = 0
+        };
+        Debug.Log(newPlayer.GetType() + " newPlayer Instantiated as a new " + " with a value of " + newPlayer.Name + " and " + newPlayer.Score);
+
+        //Instantiate highScore Player Object
+        Player highScore = new()
+        {
+            Name = "Bob",
+            Score = 5
+        };
+        Debug.Log(highScore.GetType() + " highScore Instantiated as a new " + " with a value of " + highScore.Name + " and " + highScore.Score);
+    }
+
+    // Method called when m_Gameover = true to collect score, and update session and JSON file with high score
+    public void SetScore()
+    {
+        if (IsHighScore())
+        {
+            highScore.Score = newPlayer.Score;
+            highScore.Name = newPlayer.Name;
         }
-        Debug.Log("The score is " + currentScore);
-        Debug.Log("The high score is " + TopPlayer.highScore);
+        Debug.Log("The score is " + newPlayer.Score);
+        Debug.Log("The high score is " + highScore.Score);
     }
 
-    public int GetHighScore()
+    // Compare newPlayer.Score to highScore.Score and return bool
+    public bool IsHighScore()
     {
-        return TopPlayer.highScore;
+        bool isHighScore = false;
+        if (newPlayer.Score > highScore.Score)
+        {
+            return true;
+        }
+        return isHighScore;
     }
 
-    public string GetName()
+    //Method to concatenate high score name and high score into a string
+    public string HighScoreText()
     {
-        return playerName;
-    }
+        string highScoreAndPlayer;
 
-    public class TopPlayer
-    {
-        public static string highName;
-        public static int highScore;
+        highScoreAndPlayer = highScore.Name + " : " + highScore.Score;
+        return highScoreAndPlayer;
     }
-
 }
