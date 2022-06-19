@@ -6,8 +6,8 @@ public class Player
 {
     //Player Class will be used for highPlayer and newPlayer. Static private variables since one object of each.
     
-    private static string name;
-    private static int score;
+    private string name = "blank";
+    private int score = 0;
 
     public string Name
     {

@@ -39,6 +39,8 @@ public class DataManager : MonoBehaviour
             Score = 5
         };
         Debug.Log(highScore.GetType() + " highScore Instantiated as a new " + " with a value of " + highScore.Name + " and " + highScore.Score);
+
+        //Debug.Log(HighPlayer);
     }
 
     // Method called when m_Gameover = true to collect score, and update session and JSON file with high score
@@ -74,7 +76,8 @@ public class DataManager : MonoBehaviour
     }
 }
 
-public class TestHighPlayer : Player
+
+public class HighPlayer : Player
 {
 
 }

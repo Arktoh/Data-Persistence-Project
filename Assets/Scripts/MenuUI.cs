@@ -16,31 +16,13 @@ public class MenuUI : MonoBehaviour
     public DataManager dataManager;
     public GameObject DataManager;
     public GameObject inputField;
-    Player nPlayer;
-    Player hScore;
+    
+    
 
     public void Start()
     {
-        //DataManager dataManager = new DataManager();
-        //dataManager = GameObject.Find("DataManager").GetComponent<DataManager>();
-        //Debug.Log("MenuUI.cs" + newPlayer.GetType() + " newPlayer Instantiated as a new " + " with a value of " + newPlayer.Name + " and " + newPlayer.Score);
-        //dataManager = DataManager.GetComponent<DataManager>();
-        //nPlayer = dataManager.newPlayer;
-        //Player newPlayer = DataManager.GetComponent<DataManager>().newPlayer;
-        //Debug.Log("MenuUI - newPlayer " + nPlayer.Name + " : " + nPlayer.Score);
-        //nPlayer.Name = dataManager.newPlayer.Name;
-        //nPlayer.Score = dataManager.newPlayer.Score;
-
-
-
         DataManager = GameObject.Find("DataManager");
-        dataManager = DataManager.GetComponent<DataManager>();
-        nPlayer = dataManager.newPlayer;
-        hScore = dataManager.highScore;
-
-        //Error Message: "NullReferenceException: Object reference not set to an instance of an object
-        Debug.Log(hScore.Score);
-        //Debug.Log("MenuUI - newPlayer " + dataManager.newPlayer.Name + " : " + dataManager.newPlayer.Score);        
+        dataManager = DataManager.GetComponent<DataManager>();       
     }
 
     public void StartGame()
