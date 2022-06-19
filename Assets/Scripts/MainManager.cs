@@ -13,11 +13,8 @@ public class MainManager : MonoBehaviour
     public Text ScoreText;
     public Text HighScoreText;
     public GameObject GameOverText;
-    public GameObject DataManager;
 
-    private bool m_Started = false;
-    //private int m_Points;
-    
+    private bool m_Started = false;    
     private bool m_GameOver = false;
 
     public DataManager dataManager;
@@ -26,11 +23,9 @@ public class MainManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //DataManager dataManager = gameObject.AddComponent<DataManager>();
         dataManager = GameObject.Find("DataManager").GetComponent<DataManager>();
-        DataManager = GameObject.Find("DataManager");
-        //Error Message: "NullReferenceException: Object reference not set to an instance of an object
-        Debug.Log("Playing a new game. Player name is: " + dataManager.newPlayer.Name);
+
+        Debug.Log("Starting a new game. Player name is: " + CurrentPlayer.Name);
 
         const float step = 0.6f;
         int perLine = Mathf.FloorToInt(4.0f / step);
@@ -75,9 +70,8 @@ public class MainManager : MonoBehaviour
 
     void AddPoint(int point)
     {
-        dataManager.newPlayer.Score += point;
-        ScoreText.text = $"Score : {dataManager.newPlayer.Score}";
-        //dataManager.newPlayer.SetScore(m_Points);
+        CurrentPlayer.Score += point;
+        ScoreText.text = $"Score : {CurrentPlayer.Score}";
     }
 
     public void GameOver()
@@ -85,8 +79,9 @@ public class MainManager : MonoBehaviour
         m_GameOver = true;
 
         GameOverText.SetActive(true);
-        dataManager.SetScore();
-        HighScoreText.text = $"Best Score : {dataManager.highScore.Name} {dataManager.highScore.Score}";
-        Debug.Log(dataManager.highScore.Name);
+        dataManager.SetHighScore();
+        HighScoreText.text = $"Best Score : {HighScore.Name} {HighScore.Score}";
+        CurrentPlayer.Score = 0;
+        Debug.Log($"CurrentPlayer.Score reset to {CurrentPlayer.Score}");
     }
 }

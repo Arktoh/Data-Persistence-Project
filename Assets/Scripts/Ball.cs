@@ -9,7 +9,7 @@ public class Ball : MonoBehaviour
 
     void Start()
     {
-        m_Rigidbody = GetComponent<Rigidbody>();
+        m_Rigidbody = GameObject.Find("Ball").GetComponent<Rigidbody>();
     }
     
     private void OnCollisionExit(Collision other)

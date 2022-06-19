@@ -1,15 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using System.IO;
 using UnityEngine.UI;
 
 public class DataManager : MonoBehaviour
 {
     public static DataManager Instance;
 
-    public Player newPlayer;
-    public Player highScore;
+    public static string currentPlayer;
 
     private void Awake()
     {
@@ -22,44 +20,23 @@ public class DataManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void Start()
-    {
-        //Instantiate newPlayer Player Object
-        Player newPlayer = new()
-        {
-            Name = "Blank",
-            Score = 0
-        };
-        Debug.Log(newPlayer.GetType() + " newPlayer Instantiated as a new " + " with a value of " + newPlayer.Name + " and " + newPlayer.Score);
-
-        //Instantiate highScore Player Object
-        Player highScore = new()
-        {
-            Name = "Bob",
-            Score = 5
-        };
-        Debug.Log(highScore.GetType() + " highScore Instantiated as a new " + " with a value of " + highScore.Name + " and " + highScore.Score);
-
-        //Debug.Log(HighPlayer);
-    }
-
     // Method called when m_Gameover = true to collect score, and update session and JSON file with high score
-    public void SetScore()
+    public void SetHighScore()
     {
         if (IsHighScore())
         {
-            highScore.Score = newPlayer.Score;
-            highScore.Name = newPlayer.Name;
+            HighScore.Score = CurrentPlayer.Score;
+            HighScore.Name = CurrentPlayer.Name;
         }
-        Debug.Log("The score is " + newPlayer.Score);
-        Debug.Log("The high score is " + highScore.Score);
+        Debug.Log("The score is " + CurrentPlayer.Score);
+        Debug.Log("The high score is " + HighScore.Score + ". Set by " + HighScore.Name);
     }
 
     // Compare newPlayer.Score to highScore.Score and return bool
     public bool IsHighScore()
     {
         bool isHighScore = false;
-        if (newPlayer.Score > highScore.Score)
+        if (CurrentPlayer.Score > HighScore.Score)
         {
             return true;
         }
@@ -71,13 +48,42 @@ public class DataManager : MonoBehaviour
     {
         string highScoreAndPlayer;
 
-        highScoreAndPlayer = highScore.Name + " : " + highScore.Score;
+        highScoreAndPlayer = HighScore.Name + " : " + HighScore.Score;
         return highScoreAndPlayer;
     }
 }
 
-
-public class HighPlayer : Player
+public static class CurrentPlayer
 {
+    private static string name;
+    private static int score;
 
+    public static string Name
+    {
+        get => name;
+        set => name = value;
+    }
+    public static int Score
+    {
+        get => score;
+        set => score = value;
+    }
+}
+
+
+public static class HighScore
+{
+    private static string name = "Chris";
+    private static int score = 1;
+
+    public static string Name
+    {
+        get => name;
+        set => name = value;
+    }
+    public static int Score
+    {
+        get => score;
+        set => score = value;
+    }
 }
