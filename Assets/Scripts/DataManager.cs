@@ -73,3 +73,8 @@ public class DataManager : MonoBehaviour
         return highScoreAndPlayer;
     }
 }
+
+public class TestHighPlayer : Player
+{
+
+}

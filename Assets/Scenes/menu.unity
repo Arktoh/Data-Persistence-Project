@@ -615,6 +615,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dataManager: {fileID: 337313190}
+  DataManager: {fileID: 337313189}
   inputField: {fileID: 345979191}
 --- !u!114 &1237390611
 MonoBehaviour:

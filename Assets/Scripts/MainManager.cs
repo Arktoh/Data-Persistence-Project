@@ -13,7 +13,8 @@ public class MainManager : MonoBehaviour
     public Text ScoreText;
     public Text HighScoreText;
     public GameObject GameOverText;
-    
+    public GameObject DataManager;
+
     private bool m_Started = false;
     //private int m_Points;
     
@@ -27,7 +28,7 @@ public class MainManager : MonoBehaviour
     {
         //DataManager dataManager = gameObject.AddComponent<DataManager>();
         dataManager = GameObject.Find("DataManager").GetComponent<DataManager>();
-
+        DataManager = GameObject.Find("DataManager");
         //Error Message: "NullReferenceException: Object reference not set to an instance of an object
         Debug.Log("Playing a new game. Player name is: " + dataManager.newPlayer.Name);
 

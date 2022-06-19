@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Player
 {
-    private string name;
-    private int score;
+    //Player Class will be used for highPlayer and newPlayer. Static private variables since one object of each.
+    
+    private static string name;
+    private static int score;
 
     public string Name
     {
